@@ -1,0 +1,342 @@
+<!DOCTYPE HTML>
+<!--
+	Editorial by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>PrinceCJAnalytics Portfolio</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+	</head>
+	<body class="is-preload">
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Main -->
+					<div id="main">
+						<div class="inner">
+
+							<!-- Header -->
+								<header id="header">
+									<a href="index.html" class="logo"><strong>PrinceCJAnalytics</strong>Portfolio</a>
+									<ul class="icons">
+										<li><a href="https://x.com/xPMetaX" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
+										<li><a href="https://web.facebook.com/prince.chukwuma.7564" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
+										<li><a href="https://www.linkedin.com/in/prince-chukwuma-9a909527a/" class="icon brands fa-linkedin"><span class="label">LinkedIn</span></a></li>
+										<li><a href="https://github.com/PrinceCJAnalytics" class="icon brands fa-github"><span class="label">Github</span></a></li>
+										<li><a href="https://www.instagram.com/its_princecj2601/" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
+										<li><a href="https://medium.com/@chukwumaprince1" class="icon brands fa-medium-m"><span class="label">Medium</span></a></li>
+										<li><a href="https://www.tiktok.com/@prince.chukwuma08?lang=en" class="icon brands fa-tiktok"><span class="label">Tiktok</span></a></li>
+									</ul>
+								</header>
+
+							<!-- Content -->
+								<section>
+									<header class="main">
+										<h1>A Journey Through Code That Maps Our World</h1>
+									</header>
+
+									<span class="image main"><img src="images\World Image1.jpeg" alt="" /></span>
+
+									<p>Have you ever wondered how we can transform raw data about countries – their populations, wealth, or even their very borders – into insightful and engaging maps? It might seem like a complex task reserved for expert cartographers or data scientists, but a surprisingly accessible world of code allows us to do just that. In this article, we'll embark on a journey through a Python script, demystifying the lines of code that bring global data to life, making complex information understandable and even captivating for everyone.</p>
+									<p>This particular script, <a href="https://github.com/PrinceCJAnalytics/Python-Projects/blob/main/Data_Mining_and_Visualisation_Task_2.ipynb">Data Mining and Visualisation</a>, is a wonderful example of how programming can be a powerful tool for exploration and understanding. Our primary goal is to take a dataset (inbuilt on Jupyter notebook) containing information about the world's countries and create various maps to visualize different aspects of this data, such as population distribution, economic indicators, and geographical features.</p>
+
+									
+								</section>
+								<section>
+									<header class="main">
+										<h2>The Digital Artist's Toolkit: Meet the Libraries</h2>
+									</header>
+								
+									<p>Before we dive into the specifics, let's meet the digital "paintbrushes" and "canvases" we would use. These come in the form of Python libraries – collections of pre-written code that provide powerful functionalities:</p>
+									
+									<ul>
+										<li>
+											<strong>Geopandas</strong>: Imagine a magical spreadsheet that not only understands numbers and text but also knows about shapes and locations on Earth. That's Geopandas! It's the star of our show, allowing us to work with geographical data (like country boundaries) seamlessly.
+										</li>
+										<li>
+											<strong>Matplotlib</strong>: This is like a versatile drawing toolkit. It provides the foundational tools to create a wide range of static charts and plots, including the maps we'll see.
+										</li>
+										<li>
+											<strong>Plotly Express</strong>: If Matplotlib is the classic toolkit, Plotly Express is its modern, interactive cousin. It helps create beautiful, dynamic, and often web-based visualizations that you can zoom into, hover over for more details, and generally explore.
+										</li>
+									</ul>
+								</section>
+								<section>
+									<header class="main">
+										<h2>Loading Our World Dataset</h2>
+									</header>
+										<p>The first thing we would do is to load the map of the world dataset into a variable. Think of it like unfurling a giant, detailed atlas. The line
+											<code>world = gp.read_file(gp.datasets.get_path('naturalearth_lowres'))</code> Uses Geopandas to load a built-in dataset called 'naturalearth_lowres'.
+											This dataset contains basic information about countries, including their shapes (polygons), names, continents,
+											population estimates, and GDP (Gross Domestic Product) estimates.</p>
+										<p>Once loaded, we took a quick peek at the data using <code>world.head()</code>, which shows the first few rows (5) of our global spreadsheet,
+											 and <code>world.info()</code>, which gives a summary of the data types and if any information is missing. We also counts how many countries belong to each continent with
+											 <code>world["continent"].value_counts()</code></p>
+								</section>
+								<section>
+									<header class="main">
+										<h2>A Little Spring Cleaning</h2>
+									</header>
+										<p>Sometimes, for specific analyses or visualizations, certain regions might not be relevant or could skew the results.
+											In this Project, the code <code>world = world[world["continent"] != "Antarctica"]</code> filters out Antarctica.
+											Why? Antarctica has no permanent population and unique geographical characteristics,
+											so excluding it can sometimes make it easier to focus on patterns in populated continents.</p>
+								</section>
+								<section>
+									<header class="main">
+										<h2>Visualizing Population</h2>
+									</header>
+									<p>Now for the exciting part – creating maps! We first tackled the population estimates.</p>
+									<li><strong> Static Snapshot:</strong> The code <code>world.plot(column='pop_est', legend=True, figsize=(15, 10))</code>
+									uses Matplotlib (via Geopandas' built-in plotting functions) to create a world map where countries are colored based on their estimated population
+									(<code>pop_est</code>). The <code>legend=True</code> adds a color key, and <code>figsize</code> adjusts the map's size. 
+									Titles and labels for longitude and latitude are added to make the map more understandable.
+									</li>
+									<div class="image-container" style="text-align: center; margin: 20px 0;">
+										<a href="#" class="image">
+											<img src="images\Static Snapshot.png" alt="Static World population visualization" style="max-width: 100%; height: auto; display: block; margin: 0 auto;" />
+										</a>
+										<p class="image-caption" style="font-style: italic; margin-top: 8px; color: #555;">Static snapshot of world population distribution</p>
+									</div>
+									<ul>
+										<li><strong> An Interactive Exploration:</strong> Next, <code>fig = px.scatter_geo(world, locations="iso_a3", color="continent", hover_name="name", size="pop_est", projection="natural earth")</code>
+											uses Plotly Express to create a more dynamic map.
+										</li>
+											<ul>
+												<li><code>locations="iso_a3"</code> tells Plotly to use the standard 3-letter country codes to place data on the map.</li>
+												<li><code>color="continent"</code> colors the countries by their continent.</li>
+												<li><code>hover_name="name"</code> means when you move your mouse over a country, its name will appear.</li>
+												<li><code>size="pop_est"</code> makes the size of the marker for each country proportional to its population.</li>
+												<li><code>projection="natural earth"</code> sets the map's style. This interactive map allows users to explore population data in a more engaging way.</li>
+											</ul>
+									</ul>
+									<div class="image-container" style="text-align: center; margin: 20px 0;">
+										<a href="#" class="image">
+											<img src="images\Interactive Exploration.png" alt="Interactive Exploration World population visualization" style="max-width: 100%; height: auto; display: block; margin: 0 auto;" />
+										</a>
+										<p class="image-caption" style="font-style: italic; margin-top: 8px; color: #555;">Interactive Exploration of world population distribution</p>
+									</div>
+								</section>
+								<section>
+									<header class="main">
+										<h2>Defining Borders and Locating Cities</h2>
+									</header>
+									<p>Beyond just population, we also visualized the physical layout of the world:</p>
+									<li><strong> Boundaries and Centroids (Static):</strong> The lines starting with <code>fig, ax = plt.subplots(figsize=(15, 10))</code>
+										create a map showing country boundaries (<code>world.boundary.plot(ax=ax)</code>) and the approximate center point (centroid) of each country,
+										marked with a red dot (<code>world.centroid.plot(ax=ax, marker='o', color='red', markersize=5)</code>). This gives a clear visual representation of the world's political geography.
+									</li>
+									<div class="image-container" style="text-align: center; margin: 20px 0;">
+										<a href="#" class="image">
+											<img src="images\Boundaries and Centroids (Static).png" alt="Static World population visualization" style="max-width: 100%; height: auto; display: block; margin: 0 auto;" />
+										</a>
+										<p class="image-caption" style="font-style: italic; margin-top: 8px; color: #555;">Static snapshot of the Administrative Boundaries and Centroids of Countries</p>
+									</div>
+										<li><strong> Boundaries (Interactive):</strong> The code <code>fig = px.line_geo(world, locations="iso_a3", projection="natural earth")</code>
+										uses Plotly Express to draw the administrative boundaries of countries, creating a clean, interactive map of the world's borders.
+										
+									<div class="image-container" style="text-align: center; margin: 20px 0;">
+										<a href="#" class="image">
+											<img src="images\Boundaries (Interactive).png" alt="Interactive Exploration World population visualization" style="max-width: 100%; height: auto; display: block; margin: 0 auto;" />
+										</a>
+										<p class="image-caption" style="font-style: italic; margin-top: 8px; color: #555;">Interactive Exploration of the Administrative Boundaries of Countries</p>
+									</div>
+								</section>
+								<section>
+									<header class="main">
+										<h2>Mapping Global Wealth</h2>
+									</header>
+									<p>We then shifted our focus to economic data, specifically the Gross Domestic Product (GDP), which is a measure of a country's economic output.</p>
+									<li><strong> Static GDP Map (Choropleth):</strong> The code <code>world.plot(column='gdp_md_est', legend=True, figsize=(15, 10), cmap='BuPu')</code>
+										generates a "choropleth" map. In the choropleth map, areas are shaded or patterned in proportion to the measurement of the statistical variable being displayed
+										– in this case, estimated GDP <code>(gdp_md_est)</code>. The <code>cmap='BuPu'</code> specifies a blue-purple color scheme.
+									</li>
+									<div class="image-container" style="text-align: center; margin: 20px 0;">
+										<a href="#" class="image">
+											<img src="images\Static GDP Map.png" alt="Static World GDP Map visualization" style="max-width: 100%; height: auto; display: block; margin: 0 auto;" />
+										</a>
+										<p class="image-caption" style="font-style: italic; margin-top: 8px; color: #555;">Static snapshot of the World GDP Map visualization</p>
+									</div>
+										<li><strong> Boundaries (Interactive):</strong> Similarly, <code>fig = px.choropleth(
+											data_frame= world,
+											locations= "iso_a3",
+											color="gdp_md_est",
+											projection = "natural earth",
+											hover_name="name",
+											color_continuous_scale = px.colors.sequential.Oranges,
+											title= "Choropleth Map of Gross Domestic Product (GDP)"
+										)</code>
+										creates an interactive choropleth map using Plotly Express. This version allows users to hover over countries to see their names and GDP values,
+										using an orange color scale <code>(px.colors.sequential.Oranges)</code> to represent wealth.
+										
+									<div class="image-container" style="text-align: center; margin: 20px 0;">
+										<a href="#" class="image">
+											<img src="images\Interactive GDP Map.png" alt="Interactive Exploration World population visualization" style="max-width: 100%; height: auto; display: block; margin: 0 auto;" />
+										</a>
+										<p class="image-caption" style="font-style: italic; margin-top: 8px; color: #555;">Interactive Exploration of the World GDP Map visualization</p>
+									</div>
+								</section>
+								<section>
+									<header class="main">
+										<h2>A Fairer Comparison</h2>
+									</header>
+									<p>While total GDP tells us the size of an economy, it doesn't tell us how wealthy the average person in a country might be.
+										 For that, we use GDP per capita (GDP divided by population).</p>
+									<li><strong> Calculation:</strong> We calculated a new metric with <code>world['gdp_per_cap'] = world['gdp_md_est'] / world['pop_est']</code>.
+										 A new metric named 'gdp_per_cap' (and later 'gdp_per_capita') is added to our world dataset.
+									</li>
+									<li><strong> Visualizing GDP Per Capita:</strong> Both Matplotlib <code>world.plot(column='gdp_per_cap', legend=True, figsize=(10, 6))</code>
+										and Plotly Express  <code>fig = px.choropleth(world, locations="iso_a3",
+											color="gdp_per_capita",
+											hover_name="name",
+											projection="natural earth",
+											color_continuous_scale = px.colors.sequential.Oranges,
+											title= "Choropleth Map of Gross Domestic Product (GDP) per capita Variation")</code> are then used to create choropleth maps of GDP per capita.
+											These maps can often tell a very different story than total GDP maps, highlighting disparities in wealth distribution relative to population size.
+									<div class="image-container" style="text-align: center; margin: 20px 0;">
+											<a href="#" class="image">
+												<img src="images\Static GDP Per Capita.png" alt="Static GDP Per Capita Variation visualization" style="max-width: 100%; height: auto; display: block; margin: 0 auto;" />
+											</a>
+											<p class="image-caption" style="font-style: italic; margin-top: 8px; color: #555;">Static snapshot of the GDP Per Capita Variation visualization</p>
+										</div>	
+									<div class="image-container" style="text-align: center; margin: 20px 0;">
+										<a href="#" class="image">
+											<img src="images\Interactive GDP Per Capita.png" alt="Interactive Exploration GDP Per Capita Variation visualization" style="max-width: 100%; height: auto; display: block; margin: 0 auto;" />
+										</a>
+										<p class="image-caption" style="font-style: italic; margin-top: 8px; color: #555;">Interactive Exploration of the GDP Per Capita Variation visualization</p>
+										</div>
+								</section>
+								<section>
+									<header class="main">
+										<h2>The Bigger Picture</h2>
+									</header>
+										<p>This Python script, <a href="https://github.com/PrinceCJAnalytics/Python-Projects/blob/main/Data_Mining_and_Visualisation_Task_2.ipynb">Data Mining and Visualisation</a> , does more than just draw pretty maps.
+											 It democratizes data exploration. With just a few lines of code, it allows us to:</p>
+											 <ul>
+												<li><strong> Access and process global data:</strong> Making complex geographical datasets manageable.</li>
+												<li><strong>Visualize complex patterns:</strong> Turning numbers in a table into intuitive visual stories about population, borders, and economic health.</li>
+												<li><strong>Compare and contrast:</strong> For instance, looking at raw GDP versus GDP per capita gives a more nuanced understanding of national wealth.</li>
+												<li><strong>Engage with data interactively:</strong> Plotly maps invite users to explore, discover, and ask their own questions.</li>
+											</ul>
+										<p>Even if you're not a programmer, understanding the aims of such a script reveals the power at our fingertips to make sense of our world.
+											 It’s a testament to how technology can transform data into knowledge, and knowledge into insight, allowing us to see global trends and stories that might otherwise remain hidden in spreadsheets and reports.</p>
+								</section>
+								
+
+						</div>
+					</div>
+
+				<!-- Sidebar -->
+					<div id="sidebar">
+						<div class="inner">
+
+							<!-- Search -->
+								<section id="search" class="alt">
+									<form method="post" action="#">
+										<input type="text" name="query" id="query" placeholder="Search" />
+									</form>
+								</section>
+
+							<!-- Menu -->
+							<nav id="menu">
+								<header class="major">
+									<h2>Menu</h2>
+								</header>
+								<ul>
+									<li><a href="index.html">Homepage</a></li>
+									
+									<!--<li><a href="elements.html">Elements</a></li>-->
+									<li>
+										<span class="opener">Projects</span>
+										<ul>
+											<li><a href="Python Projects.html">Python Projects</a></li>
+											<li><a href="R Projects.html">R Projects</a></li>
+											<li><a href="SQL Projects.html">SQL Projects</a></li>
+											<li><a href="Excel Projects.html">Excel Projects</a></li>
+											<li><a href="PowerBI Projects.html">PowerBI Projects</a></li>
+											<li><a href="Minitab Projects.html">Minitab Projects</a></li>
+											<li><a href="SPSS Projects.html">SPSS Projects</a></li>
+											<li><a href="Tableau Projects.html">Tableau Projects</a></li>
+											<li><a href="LaTeX Project.html">LaTeX Projects</a></li>
+										</ul>
+									</li>
+									<li><a href="About Me.html">About Me</a></li>
+									<!--<li><a href="#">Etiam Dolore</a></li>
+									<li><a href="#">Adipiscing</a></li>
+									<li>
+										<span class="opener">Another Submenu</span>
+										<ul>
+											<li><a href="#">Lorem Dolor</a></li>
+											<li><a href="#">Ipsum Adipiscing</a></li>
+											<li><a href="#">Tempus Magna</a></li>
+											<li><a href="#">Feugiat Veroeros</a></li>
+										</ul>
+									</li>
+									<li><a href="#">Maximus Erat</a></li>
+									<li><a href="#">Sapien Mauris</a></li>
+									<li><a href="#">Amet Lacinia</a></li>
+								</ul>-->
+							</nav>
+
+							<!-- Section 
+								<section>
+									<header class="major">
+										<h2>Ante interdum</h2>
+									</header>
+									<div class="mini-posts">
+										<article>
+											<a href="#" class="image"><img src="images/pic07.jpg" alt="" /></a>
+											<p>Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore aliquam.</p>
+										</article>
+										<article>
+											<a href="#" class="image"><img src="images/pic08.jpg" alt="" /></a>
+											<p>Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore aliquam.</p>
+										</article>
+										<article>
+											<a href="#" class="image"><img src="images/pic09.jpg" alt="" /></a>
+											<p>Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore aliquam.</p>
+										</article>
+									</div>
+									<ul class="actions">
+										<li><a href="#" class="button">More</a></li>
+									</ul>
+								</section>-->
+
+							<!-- Section -->
+							<section>
+								<header class="major">
+									<h2>Get in touch</h2>
+								</header>
+								<p>Ready to explore how data analytics and science can transform your projects or enhance your skills? Whether you're interested in specialized training or expert analytical services, I'm here to help you achieve your goals.</p>
+								<ul class="contact">
+									<li class="icon solid fa-envelope"><a href="https://mail.google.com/mail/?view=cm&to=opn.chukwuma@stu.unizik.edu.ng" target="_blank">opn.chukwuma@stu.unizik.edu.ng </a></li>
+									<li class="icon solid fa-phone">(+234) 81062-29334</li>
+									<li class="icon solid fa-home">West Africa<br />
+									</li>
+								</ul>
+							</section>
+
+							<!-- Footer -->
+							<footer id="footer">
+								<p class="copyright">&copy; PrinceCJ. All rights reserved. <a href="https://github.com/PrinceCJAnalytics">PrinceCJAnalytics</a></p>
+							</footer>
+
+						</div>
+					</div>
+
+			</div>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+
+	</body>
+</html>

@@ -1,0 +1,308 @@
+<!DOCTYPE HTML>
+<!--
+	Editorial by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>PrinceCJAnalytics Portfolio</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+	</head>
+	<body class="is-preload">
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Main -->
+					<div id="main">
+						<div class="inner">
+
+							<!-- Header -->
+								<header id="header">
+									<a href="index.html" class="logo"><strong>PrinceCJAnalytics</strong>Portfolio</a>
+									<ul class="icons">
+										<li><a href="https://x.com/xPMetaX" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
+										<li><a href="https://web.facebook.com/prince.chukwuma.7564" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
+										<li><a href="https://www.linkedin.com/in/prince-chukwuma-9a909527a/" class="icon brands fa-linkedin"><span class="label">LinkedIn</span></a></li>
+										<li><a href="https://github.com/PrinceCJAnalytics" class="icon brands fa-github"><span class="label">Github</span></a></li>
+										<li><a href="https://www.instagram.com/its_princecj2601/" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
+										<li><a href="https://medium.com/@chukwumaprince1" class="icon brands fa-medium-m"><span class="label">Medium</span></a></li>
+										<li><a href="https://www.tiktok.com/@prince.chukwuma08?lang=en" class="icon brands fa-tiktok"><span class="label">Tiktok</span></a></li>
+									</ul>
+								</header>
+
+							<!-- Content -->
+								<section>
+									<header class="main">
+										<h1>An R Adventure into US Arrest Statistics</h1>
+									</header>
+
+									<span class="image main"><img src="images\crime1.jpeg" alt="" /></span>
+
+									<p>Ever wondered how data scientists and analysts delve into complex datasets to uncover hidden patterns and insights? It often involves a bit of code, some curiosity, and the right tools. Today, I want to take you on a journey with me as I explore a fascinating dataset called "USArrests" using the R programming language.
+										R is a go-to language for many when it comes to statistical analysis and data visualization, and I'll show you how, step-by-step, we can make sense of crime statistics across different US states.
+										My goal is to make this exploration comprehensive and captivating, even if you're new to the world of data analysis.</p>
+									<p>The R file we're looking at, <a href="https://github.com/PrinceCJAnalytics/R-Projects/blob/main/Decoding%20Crime.R">Decoding Crime</a>, is essentially a set of instructions I wrote to investigate arrest rates for various serious crimes in the US, along with information about urban population percentages.</p>
+
+									
+								</section>
+								<section>
+									<header class="main">
+										<h2>Loading and Peeking at Our Data</h2>
+									</header>
+									<p>First things first, I needed to bring the <code>USArrests</code> dataset into my R environment.
+										This dataset is conveniently built into R, so a simple command does the trick: <code>data(USArrests)</code> </p>
+									<p>With the data loaded, my first instinct is always to get a feel for what it looks like. I started by asking R to show me the first 4 rows of the dataset: <code>print(head(USArrests, 4))</code> </p>
+									<p>This gives me a quick glimpse of the states and the types of data recorded: Murder, Assault, and Rape arrests (per 100,000 people), and the percentage of the population that is Urban (UrbanPop).
+										To get the other end of the picture, I then looked at the last 3 rows: <code>print(tail(USArrests, 3))</code>
+									</p>
+								
+									
+								</section>
+								<section>
+									<header class="main">
+										<h2>Understanding the Blueprint</h2>
+									</header>
+										<p>Seeing a few rows is helpful, but to really understand my dataset, I needed to examine its <strong>structure</strong> . The <code>str()</code> function is perfect for this, acting like a blueprint: <code>str(USArrests)</code>
+											This command told me that I'm working with a 'data.frame' (R's term for a table-like structure) with 50 observations (representing the 50 US states) and 4 variables (Murder, Assault, UrbanPop, Rape).
+										</p>
+										<p>Next, I wanted a quick statistical overview. The <code>summary()</code> function provides key statistics like minimum, maximum, mean, median, and quartiles for each variable: <code>summary(USArrests)</code>
+											This is super useful for getting an initial sense of the range and central tendency of arrest rates and urban population percentages.</p>
+										<p>Before diving deeper, I also performed a crucial check: are there any missing values? Missing data can sometimes complicate analysis, so it's good to know upfront.
+											<code>anyNA(USArrests)</code>; Fortunately, this command returned <code>FALSE</code>, indicating our dataset is complete – no missing pieces in this puzzle!
+										</p>
+								</section>
+								<section>
+									<header class="main">
+										<h2>Digging Deeper: Asking Specific Questions</h2>
+									</header>
+									<p>With a good overview, I started to ask more specific questions. For instance, I was curious about which states had the highest and lowest arrest rates for each crime category.</p>
+									<p>For Murder arrests, I used these lines to find the states at the extremes:</p>
+									<ul>
+									  <li> <code>USArrests[USArrests$Murder == max(USArrests$Murder), ] # Highest</code></li>
+									  <li><code>USArrests[USArrests$Murder == min(USArrests$Murder), ] # Lowest</code></li>
+									</ul>
+									<p>The code identifies Georgia as having the highest murder arrest rate (17.4 per 100,000) and North Dakota as the lowest (0.8 per 100,000) in this dataset.</p>
+									<p>I repeated this process for Assault arrests:</p>
+									<ul>
+										<li> <code>USArrests[USArrests$Assault == max(USArrests$Assault), ] # Highest</code></li>
+										<li><code>USArrests[USArrests$Assault == min(USArrests$Assault), ] # Lowest</code></li>
+									  </ul>
+									<p>This revealed North Carolina with the highest assault arrest rate (337 per 100,000) and North Dakota again with the lowest (45 per 100,000).</p>
+									<p>And finally for Rape arrests:</p>
+									<ul>
+										<li> <code>USArrests[USArrests$Rape == max(USArrests$Rape), ] # Highest</code></li>
+										<li><code>USArrests[USArrests$Rape == min(USArrests$Rape), ] # Lowest</code></li>
+									  </ul>
+									<p>Here, Nevada showed the highest rape arrest rate (46 per 100,000), and North Dakota once more had the lowest (7.3 per 100,000).</p>
+									<p>Sometimes, we want to focus on a specific segment of the data. For example, I decided to look at states where Murder arrests were less than 5 (per 100,000). This is called subsetting:</p>
+									<ul>
+										<li> <code>str(USArrests[USArrests$Murder< 5, ])</code></li>
+									  </ul>
+									<p>This showed me that 16 states in the dataset fall into this lower murder arrest category.</p>
+								</section>
+								
+								<section>
+									<header class="main">
+										<h2>Visualizing the Data</h2>
+									</header>
+									<p>Numbers and tables are informative, but visualizations can often tell a more compelling story. I used two common types of plots: boxplots and histograms.</p>
+									<h3>A Quick Sketch of Distribution</h3>
+									
+									<p>Boxplots are fantastic for getting a quick visual summary of a variable's distribution. They show the median (the middle value), the quartiles (breaking the data into four equal parts), and potential outliers (values that are unusually high or low). I created boxplots for each variable:</p>
+									
+									<ul>
+										<li> <code>boxplot(USArrests$Murder, main = "Boxplot of US Murder Arrest (Per 100,000)", ylab = "Murder Arrest (Per 100,000)")</code></li>
+										<li><code>boxplot(USArrests$Assault, main = "Boxplot of US Assault Arrest (Per 100,000)", ylab = "Assault Arrest (Per 100,000)")</code></li>
+										<li><code>boxplot(USArrests$UrbanPop, main = "Boxplot of US Percent urban population", ylab = "UrbanPop")</code></li>
+										<li><code>boxplot(USArrests$Rape, main = "Boxplot of US Rape Arrest (Per 100,000)", ylab = "Rape Arrest (Per 100,000)")</code></li>
+									  </ul>
+									<p>Looking at these, I noted that outliers (unusually high values) seemed to be present primarily in the Rape arrest variable.</p>
+									<div class="image-container" style="text-align: center; margin: 20px 0;">
+										<a href="#" class="image">
+											<img src="images\Boxplot Decoding Crime.png" alt="" style="max-width: 100%; height: auto; display: block; margin: 0 auto;" />
+										</a>
+										<p class="image-caption" style="font-style: italic; margin-top: 8px; color: #555;"></p>
+									</div>
+									<h3>Understanding Frequencies</h3>
+									<p>Histograms show the frequency distribution of a variable – how often different ranges of values occur. I generated histograms for all four variables to see the shape of their distributions:</p>
+									 
+									<ul>
+										<li> <code>hist(USArrests$Murder, main = "Histogram of US Murder Arrest (Per 100,000)", xlab = "Murder Arrest (Per 100,000)")</code></li>
+										<li><code>hist(USArrests$Assault, main = "Histogram of US Assault Arrest (Per 100,000)", xlab = "Assault Arrest (Per 100,000)")</code></li>
+										<li><code>hist(USArrests$UrbanPop, main = "Histogram of US Percent urban population", xlab = "UrbanPop")</code></li>
+										<li><code>hist(USArrests$Rape, main = "Histogram of US Rape Arrest (Per 100,000)", xlab = "Rape Arrest (Per 100,000)")</code></li>
+									  </ul>
+									<div class="image-container" style="text-align: center; margin: 20px 0;">
+										<a href="#" class="image">
+											<img src="images\Histogram Decoding Crime.png" alt="" style="max-width: 100%; height: auto; display: block; margin: 0 auto;" />
+										</a>
+										<p class="image-caption" style="font-style: italic; margin-top: 8px; color: #555;"></p>
+									</div>
+								</section>
+								
+								<section>
+									<header class="main">
+										<h2>Connecting the Dots: Exploring Relationships with Correlation</h2>
+									</header>
+									<p>An interesting question is whether these different crime rates are related. For example, do states with high assault rates also tend to have high murder rates? To investigate this, I calculated a correlation matrix:</p>
+									
+									<ul>
+										<li> <code>corr_matrix = cor(USArrests)</code></li>
+										<li><code>print(corr_matrix)</code></li>
+									  </ul>
+									<p>This matrix shows correlation coefficients between each pair of variables. A value close to +1 indicates a strong positive relationship (as one goes up, the other tends to go up), a value close to -1 indicates a strong negative relationship (as one goes up, the other tends to go down), and a value near 0 suggests a weak relationship.</p>
+									<p>To make this easier to interpret, I visualized the correlation matrix. First, I used the corrplot package:</p>
+									
+									<ul>
+										<li> <code># install.packages("corrplot") # Only need to run once to install</code></li>
+										<li><code>library(corrplot)</code></li>
+										<li><code>corrplot(corr_matrix)</code></li>
+									  </ul>
+									<p>This creates a colorful plot where the size and color of circles represent the strength and direction of correlations.</p>
+									<div class="image-container" style="text-align: center; margin: 20px 0;">
+										<a href="#" class="image">
+											<img src="images\Corrplot Correlation Matrix.png" alt="" style="max-width: 100%; height: auto; display: block; margin: 0 auto;" />
+										</a>
+										<p class="image-caption" style="font-style: italic; margin-top: 8px; color: #555;">Corrplot Correlation Matrix</p>
+									</div>
+									<p>Then, for another perspective, I used the GGally package, which often produces aesthetically pleasing graphics:</p>
+									
+									<ul>
+										<li> <code># install.packages("colorspace") # May be needed for GGally</code></li>
+										<li><code># install.packages("GGally")   # Only need to run once to install</code></li>
+										<li><code>library(GGally)</code></li>
+										<li><code>ggcorr(USArrests)</code></li>
+									  </ul>
+									<p>This also generates a visual representation of the correlation matrix, helping to quickly spot relationships between the variables.</p>
+									<div class="image-container" style="text-align: center; margin: 20px 0;">
+										<a href="#" class="image">
+											<img src="images\GGally Correlation Matrix.png" alt="" style="max-width: 100%; height: auto; display: block; margin: 0 auto;" />
+										</a>
+										<p class="image-caption" style="font-style: italic; margin-top: 8px; color: #555;">GGally Correlation Matrix</p>
+									</div>
+								</section>
+								
+								<section>
+									<header class="main">
+										<h2>Final Thoughts on This Adventure</h2>
+									</header>
+									<p>Working through the <a href="https://github.com/PrinceCJAnalytics/R-Projects/blob/main/Decoding%20Crime.R">Decoding Crime</a> code allowed me to take a raw dataset and systematically explore it. We started by simply loading the data, then moved to understanding its basic structure and summary statistics. We asked targeted questions to find extreme values and filter the data. Finally, and perhaps most powerfully, we used visualizations like boxplots, histograms, and correlation plots to reveal patterns, distributions, and relationships that might not be obvious from just looking at numbers.</p>
+									<p>This kind of exploratory data analysis, which I've walked you through, is a fundamental part of how we can turn data into understanding. Whether it's crime statistics, business trends, or scientific measurements, tools like R empower us to ask questions, seek answers, and ultimately tell the stories hidden within the data.</p>
+								</section>
+
+						</div>
+					</div>
+
+				<!-- Sidebar -->
+				<div id="sidebar">
+					<div class="inner">
+
+						<!-- Search -->
+							<section id="search" class="alt">
+								<form method="post" action="#">
+									<input type="text" name="query" id="query" placeholder="Search" />
+								</form>
+							</section>
+
+						<!-- Menu -->
+						<nav id="menu">
+							<header class="major">
+								<h2>Menu</h2>
+							</header>
+							<ul>
+								<li><a href="index.html">Homepage</a></li>
+								
+								<!--<li><a href="elements.html">Elements</a></li>-->
+								<li>
+									<span class="opener">Projects</span>
+									<ul>
+										<li><a href="Python Projects.html">Python Projects</a></li>
+										<li><a href="R Projects.html">R Projects</a></li>
+										<li><a href="SQL Projects.html">SQL Projects</a></li>
+										<li><a href="Excel Projects.html">Excel Projects</a></li>
+										<li><a href="PowerBI Projects.html">PowerBI Projects</a></li>
+										<li><a href="Minitab Projects.html">Minitab Projects</a></li>
+										<li><a href="SPSS Projects.html">SPSS Projects</a></li>
+										<li><a href="Tableau Projects.html">Tableau Projects</a></li>
+										<li><a href="LaTeX Project.html">LaTeX Projects</a></li>
+									</ul>
+								</li>
+								<li><a href="About Me.html">About Me</a></li>
+								<!--<li><a href="#">Etiam Dolore</a></li>
+								<li><a href="#">Adipiscing</a></li>
+								<li>
+									<span class="opener">Another Submenu</span>
+									<ul>
+										<li><a href="#">Lorem Dolor</a></li>
+										<li><a href="#">Ipsum Adipiscing</a></li>
+										<li><a href="#">Tempus Magna</a></li>
+										<li><a href="#">Feugiat Veroeros</a></li>
+									</ul>
+								</li>
+								<li><a href="#">Maximus Erat</a></li>
+								<li><a href="#">Sapien Mauris</a></li>
+								<li><a href="#">Amet Lacinia</a></li>
+							</ul>-->
+						</nav>
+
+							<!-- Section 
+								<section>
+									<header class="major">
+										<h2>Ante interdum</h2>
+									</header>
+									<div class="mini-posts">
+										<article>
+											<a href="#" class="image"><img src="images/pic07.jpg" alt="" /></a>
+											<p>Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore aliquam.</p>
+										</article>
+										<article>
+											<a href="#" class="image"><img src="images/pic08.jpg" alt="" /></a>
+											<p>Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore aliquam.</p>
+										</article>
+										<article>
+											<a href="#" class="image"><img src="images/pic09.jpg" alt="" /></a>
+											<p>Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore aliquam.</p>
+										</article>
+									</div>
+									<ul class="actions">
+										<li><a href="#" class="button">More</a></li>
+									</ul>
+								</section>-->
+
+							<!-- Section -->
+							<section>
+								<header class="major">
+									<h2>Get in touch</h2>
+								</header>
+								<p>Ready to explore how data analytics and science can transform your projects or enhance your skills? Whether you're interested in specialized training or expert analytical services, I'm here to help you achieve your goals.</p>
+								<ul class="contact">
+									<li class="icon solid fa-envelope"><a href="https://mail.google.com/mail/?view=cm&to=opn.chukwuma@stu.unizik.edu.ng" target="_blank">opn.chukwuma@stu.unizik.edu.ng </a></li>
+									<li class="icon solid fa-phone">(+234) 81062-29334</li>
+									<li class="icon solid fa-home">West Africa<br />
+									</li>
+								</ul>
+							</section>
+
+							<!-- Footer -->
+							<footer id="footer">
+								<p class="copyright">&copy; PrinceCJ. All rights reserved. <a href="https://github.com/PrinceCJAnalytics">PrinceCJAnalytics</a></p>
+							</footer>
+
+						</div>
+					</div>
+
+			</div>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+
+	</body>
+</html>
